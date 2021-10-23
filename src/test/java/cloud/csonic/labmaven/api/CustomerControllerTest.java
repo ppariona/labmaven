@@ -71,4 +71,23 @@ class CustomerControllerTest {
         verify(customerService, times(1)).listAll();
         verifyNoMoreInteractions(customerService);
     }
+
+    @Test
+    void getById() throws Exception {
+        var c1 = Customer.builder()
+                .id(767)
+                .name("name_1")
+                .lastName("lastName_1")
+                .build();
+
+        when(customerService.getById(767)).thenReturn(c1);
+
+        this.mockMvc.perform(get("/customers/767"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.customer.id", is(767)))
+                .andExpect(jsonPath("$.customer.name", is("name_1")))
+                .andExpect(jsonPath("$.customer.lastName", is("lastName_1")));
+
+    }
 }

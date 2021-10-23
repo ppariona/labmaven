@@ -27,5 +27,10 @@ public class CustomerServiceImpl implements CustomerService{
         return Arrays.asList(customer1,customer2);
     }
 
+    @Override
+    public Customer getById(long id) {
+        return customer1;
+    }
+
 
 }
