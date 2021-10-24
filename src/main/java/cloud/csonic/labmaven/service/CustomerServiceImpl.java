@@ -1,35 +1,28 @@
 package cloud.csonic.labmaven.service;
 
 import cloud.csonic.labmaven.model.Customer;
+import cloud.csonic.labmaven.repository.CustomerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService{
 
 
-    Customer customer1 = Customer.builder()
-            .id(1)
-            .lastName("Picapiedra")
-            .name("Pedro")
-            .build();
-
-    Customer customer2 = Customer.builder()
-            .id(2)
-            .lastName("Marmol")
-            .name("Pablo")
-            .build();
+    private final CustomerRepository customerRepository;
 
     @Override
     public List<Customer> listAll() {
-        return Arrays.asList(customer1,customer2);
+        return customerRepository.listAll();
     }
 
     @Override
     public Customer getById(long id) {
-        return customer1;
+        return customerRepository.getById(id);
     }
 
 
