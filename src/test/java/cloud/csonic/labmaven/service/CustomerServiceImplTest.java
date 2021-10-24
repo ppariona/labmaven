@@ -12,8 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { CustomerServiceImplTest.TestConfiguration.class })
@@ -37,6 +40,7 @@ class CustomerServiceImplTest {
 
     @BeforeEach
     void setUp() {
+        reset(customerRepository);
     }
 
     @AfterEach
@@ -51,9 +55,28 @@ class CustomerServiceImplTest {
 
     @Test
     void listAll() {
+
+        var list = Arrays.asList(
+                Customer.builder()
+                        .id(1)
+                        .name("name_1")
+                        .lastName("lastName_1")
+                .build(),
+                Customer.builder()
+                        .id(2)
+                        .name("name_2")
+                        .lastName("lastName_2")
+                        .build()
+        );
+
+        when(customerRepository.listAll()).thenReturn(list);
+        var data = customerService.listAll();
+        assertThat(data).isNotNull();
+        assertThat(data.size()).isEqualTo(2);
     }
 
     @Test
     void getById() {
+
     }
 }
