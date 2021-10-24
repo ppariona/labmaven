@@ -15,8 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { CustomerServiceImplTest.TestConfiguration.class })
@@ -71,12 +70,36 @@ class CustomerServiceImplTest {
 
         when(customerRepository.listAll()).thenReturn(list);
         var data = customerService.listAll();
+
         assertThat(data).isNotNull();
         assertThat(data.size()).isEqualTo(2);
+        assertThat(data.get(0).getId()).isEqualTo(1);
+        assertThat(data.get(0).getName()).isEqualTo("name_1");
+        assertThat(data.get(0).getLastName()).isEqualTo("lastName_1");
+
+        verify(customerRepository,times(1)).listAll();
+        verifyNoMoreInteractions(customerRepository);
     }
 
     @Test
     void getById() {
+
+        var c1 =   Customer.builder()
+                .id(1)
+                .name("name_1")
+                .lastName("lastName_1")
+                .build();
+
+        when(customerRepository.getById(1)).thenReturn(c1);
+
+        var data = customerService.getById(1);
+        assertThat(data).isNotNull();
+        assertThat(data.getId()).isEqualTo(1);
+        assertThat(data.getName()).isEqualTo("name_1");
+        assertThat(data.getLastName()).isEqualTo("lastName_1");
+
+        verify(customerRepository,times(1)).getById(1);
+        verifyNoMoreInteractions(customerRepository);
 
     }
 }
