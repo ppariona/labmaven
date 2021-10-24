@@ -24,7 +24,6 @@ public class CustomerController {
 
         return CustomersDto.builder()
                 .customers(customerService.listAll())
-                .customers(customerService.listAll())
                 .build();
     }
 
