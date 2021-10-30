@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.is;
 
-
+/*
 @WebMvcTest(CustomerController.class)
 class CustomerControllerTest {
 
@@ -90,4 +90,4 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.customer.lastName", is("lastName_1")));
 
     }
-}
+}*/
