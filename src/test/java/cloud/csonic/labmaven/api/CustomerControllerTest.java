@@ -4,6 +4,7 @@ import cloud.csonic.labmaven.model.Customer;
 import cloud.csonic.labmaven.service.CustomerService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.is;
 
-/*
+
 @WebMvcTest(CustomerController.class)
 class CustomerControllerTest {
 
@@ -38,6 +39,7 @@ class CustomerControllerTest {
     void tearDown() {
     }
 
+    @Disabled
     @Test
     void listAll() throws Exception {
 
@@ -72,6 +74,7 @@ class CustomerControllerTest {
         verifyNoMoreInteractions(customerService);
     }
 
+    @Disabled
     @Test
     void getById() throws Exception {
         var c1 = Customer.builder()
@@ -90,4 +93,4 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.customer.lastName", is("lastName_1")));
 
     }
-}*/
+}
