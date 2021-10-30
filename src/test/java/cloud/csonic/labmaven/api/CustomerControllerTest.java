@@ -39,7 +39,6 @@ class CustomerControllerTest {
     void tearDown() {
     }
 
-    @Disabled
     @Test
     void listAll() throws Exception {
 
@@ -74,7 +73,6 @@ class CustomerControllerTest {
         verifyNoMoreInteractions(customerService);
     }
 
-    @Disabled
     @Test
     void getById() throws Exception {
         var c1 = Customer.builder()
