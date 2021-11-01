@@ -1,7 +1,6 @@
 package cloud.csonic.labmaven.api.dto;
 
 import cloud.csonic.labmaven.model.Customer;
-//import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Builder;
 import lombok.Getter;
