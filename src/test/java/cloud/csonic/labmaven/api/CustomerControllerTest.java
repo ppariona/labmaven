@@ -58,7 +58,7 @@ class CustomerControllerTest {
 
         when(customerService.listAll()).thenReturn(list);
 
-        this.mockMvc.perform(get("/customers_2"))
+        this.mockMvc.perform(get("/customers"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", hasSize(2)))
