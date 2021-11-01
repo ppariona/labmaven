@@ -5,7 +5,8 @@ import cloud.csonic.labmaven.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+//TODO: PMD error
+//import java.util.Arrays;
 import java.util.List;
 
 @Service
