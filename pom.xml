@@ -92,16 +92,6 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>pre-unit-test</id>
-						<goals>
-							<goal>prepare-agent</goal>
-							<goal>prepare-agent-integration</goal>
-							<goal>report</goal>
-							<goal>report-integration</goal>
-							<goal>check</goal>
-						</goals>
-					</execution>
-					<execution>
 						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
