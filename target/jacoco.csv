@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+labmaven,cloud.csonic.labmaven.repository,CustomerRepositoryImpl,39,3,0,0,16,1,2,1,2,1
+labmaven,cloud.csonic.labmaven.service,CustomerServiceImpl,0,9,0,0,0,2,0,2,0,2
+labmaven,cloud.csonic.labmaven.api,CustomerController,0,15,0,0,0,6,0,2,0,2
+labmaven,cloud.csonic.labmaven,LabmavenApplication,5,3,0,0,2,1,1,1,1,1

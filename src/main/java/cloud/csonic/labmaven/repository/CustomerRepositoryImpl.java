@@ -9,26 +9,33 @@ import java.util.List;
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository{
 
-    Customer customer1 = Customer.builder()
-            .id(1)
-            .lastName("Picapiedra")
-            .name("Pedro")
-            .build();
 
-    Customer customer2 = Customer.builder()
-            .id(2)
-            .lastName("Marmol")
-            .name("Pablo")
-            .build();
 
 
     @Override
     public List<Customer> listAll() {
-        return Arrays.asList(customer1,customer2);
+        final Customer customer1 = Customer.builder()
+                .id(1)
+                .lastName("Picapiedra")
+                .name("Pedro")
+                .build();
+
+        final Customer customer2 = Customer.builder()
+                .id(2)
+                .lastName("Marmol")
+                .name("Pablo")
+                .build();
+
+        return Arrays.asList(customer1,customer2)
+                ;
     }
 
     @Override
     public Customer getById(long id) {
-        return customer1;
+        return Customer.builder()
+                .id(1)
+                .lastName("Picapiedra")
+                .name("Pedro")
+                .build();
     }
 }
