@@ -15,6 +15,12 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven-pmd-plugin.version>3.15.0</maven-pmd-plugin.version>
+		<spotbugs-maven-plugin.version>4.4.2.2</spotbugs-maven-plugin.version>
+		<findsecbugs-plugin.version>1.11.0</findsecbugs-plugin.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,7 +43,11 @@
 			<scope>test</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-pmd-plugin</artifactId>
+			<version>${maven-pmd-plugin.version}</version>
+		</dependency>
 
 	</dependencies>
 
@@ -46,6 +56,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<showWarnings>true</showWarnings>
+					<compilerArgs>
+						<arg>-Xlint:all</arg>
+						<arg>-Xlint:-processing</arg>
+						<arg>-Werror</arg>
+					</compilerArgs>
+				</configuration>
+
 			</plugin>
 
 			<plugin>
@@ -81,6 +108,53 @@
 					</execution>
 				</executions>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${maven-pmd-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+							<goal>cpd-check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<analysisCache>true</analysisCache>
+					<printFailingErrors>true</printFailingErrors>
+					<linkXRef>false</linkXRef>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>${spotbugs-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludeFilterFile>config/spotbugs-exclude.xml</excludeFilterFile>
+					<threshold>low</threshold>
+					<plugins>
+						<plugin>
+							<groupId>com.h3xstream.findsecbugs</groupId>
+							<artifactId>findsecbugs-plugin</artifactId>
+							<version>${findsecbugs-plugin.version}</version>
+						</plugin>
+					</plugins>
+				</configuration>
+			</plugin>
+
 
 
 		</plugins>
