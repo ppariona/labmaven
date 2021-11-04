@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/customers1")
+@RequestMapping("/customers")
 @AllArgsConstructor
 public class CustomerController {
 
