@@ -27,12 +27,12 @@ public class CustomerController {
     @GetMapping("/{id}")
     public CustomerDto getById(@PathVariable("id")long id){
 
-        System.out.println(id);
-
         return CustomerDto.builder()
                 .customer(customerService.getById(id))
                 .build();
     }
+
+
 
 
 }
