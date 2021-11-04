@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/files")
@@ -20,12 +21,19 @@ public class FilesController {
 
 
     @GetMapping("/{path}")
-    public List<String> getFiles(@PathVariable("path")String path) throws IOException {
+    public List<String> getFiles(@PathVariable("path")String dir) throws IOException {
 
-        return Files.list(Paths.get(path))
+        try (Stream<Path> stream = Files.list(Paths.get(dir))) {
+            return stream.filter(file->Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toList());
+        }
+
+        /*Files.list(Paths.get(dir))
                 .filter(file->Files.isDirectory(file))
                 .map(Path::getFileName)
                 .map(Path::toString)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 }
