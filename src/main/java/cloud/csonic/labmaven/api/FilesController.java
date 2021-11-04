@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +25,9 @@ public class FilesController {
     public List<String> getFiles(@PathVariable("path")String dir) throws IOException {
 
         try (Stream<Path> stream = Files.list(Paths.get(dir))) {
-            return stream.filter(file->Files.isDirectory(file))
+            return stream
+                    //.filter(file->Files.isDirectory(file))
+                    .filter(Files::isDirectory)
                     .map(Path::getFileName)
                     .map(Path::toString)
                     .collect(Collectors.toList());
