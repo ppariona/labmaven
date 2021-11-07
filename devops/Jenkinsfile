@@ -23,6 +23,11 @@ pipeline {
          }
 
          stage('Stage 4') {
+                when {
+                   not {
+                       branch 'master'
+                   }
+               }
                 steps {
                     script {
                         echo 'Stage 4'
