@@ -58,7 +58,7 @@ pipeline {
             }
          }
 
-         stage('Stage 4') {
+         stage('Other Building') {
                 when {
                    not {
                        branch 'master'
@@ -70,10 +70,18 @@ pipeline {
                     }
               }
          }
-         stage('Stage 5') {
+         stage('Dockering') {
+                 when {
+                     branch "master"
+                 }
                 steps {
                     script {
-                        echo 'Stage 5'
+                        copyArtifacts filter: 'target/*.jar',
+                                      fingerprintArtifacts: true,
+                                      projectName: '${JOB_NAME}',
+                                      flatten: true,
+                                      selector: specific('${BUILD_NUMBER}'),
+                                      target: 'target';
                     }
               }
          }
