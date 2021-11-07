@@ -82,6 +82,7 @@ pipeline {
                                       flatten: true,
                                       selector: specific('${BUILD_NUMBER}'),
                                       target: 'target';
+                        sh 'docker --version'
                     }
               }
          }
