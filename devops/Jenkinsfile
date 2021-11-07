@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    stages {
+        stage('Stage 1') {
+            steps {
+                echo 'Hello world!'
+            }
+        }
+        stage('Stage 2') {
+            when {
+                branch "features/*"
+            }
+            steps {
+                script {
+                    echo 'Stage 2'
+                }
+            }
+        }
+
+         stage('Stage 3') {
+                steps {
+                    script {
+                        echo 'Stage 3'
+                    }
+              }
+         }
+
+         stage('Stage 4') {
+                when {
+                   not {
+                       branch 'master'
+                   }
+               }
+                steps {
+                    script {
+                        echo 'Stage 4'
+                    }
+              }
+         }
+         stage('Stage 5') {
+                steps {
+                    script {
+                        echo 'Stage 5'
+                    }
+              }
+         }
+    }
+}

@@ -24,8 +24,8 @@ public class FilesController {
 
         try (Stream<Path> stream = Files.list(Paths.get(dir))) {
             return stream
-                    .filter(file->Files.isDirectory(file))
-                    //.filter(Files::isDirectory)
+                    //.filter(file->Files.isDirectory(file))
+                    .filter(Files::isDirectory)
                     .map(Path::getFileName)
                     .map(Path::toString)
                     .collect(Collectors.toList());
