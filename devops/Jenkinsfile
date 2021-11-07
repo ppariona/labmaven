@@ -1,9 +1,19 @@
 pipeline {
-    agent any
+     agent any
+
+     tools {
+        maven 'maven-default'
+     }
+
     stages {
         stage('Stage 1') {
+            when {
+                branch "features/*"
+            }
             steps {
-                echo 'Hello world!'
+                script {
+                     mvn verify
+                }
             }
         }
         stage('Stage 2') {
