@@ -6,7 +6,7 @@ pipeline {
      }
 
     stages {
-        stage('Stage 1') {
+        stage('Building') {
             when {
                 branch "features/*"
             }
@@ -19,8 +19,11 @@ pipeline {
                 always {
                     junit(testResults: '**/surefire-reports/*.xml', allowEmptyResults: true)
                     junit(testResults: '**/failsafe-reports/*.xml', allowEmptyResults: true)
-                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
                     jacoco runAlways: true
+                }
+                success {
+                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
+                    //archiveArtifacts artifacts: 'target/lab04-0.0.1-SNAPSHOT.jar', fingerprint: true, onlyIfSuccessful: true
                 }
             }
         }
