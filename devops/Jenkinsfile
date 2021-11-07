@@ -95,7 +95,8 @@ pipeline {
                }
                 steps {
                      script {
-                        sh 'docker images'
+                        sh 'docker tag msmicroservice msmicroservice:${env.BUILD_NUMBER}'
+                        sh 'docker push msmicroservice:${env.BUILD_NUMBER}'
                      }
                 }
           }
