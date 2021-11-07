@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   microservice:
-    image: msproductos:latest
+    image: msmicroservice
     build:
       context: .
       dockerfile: ./src/main/docker/Dockerfile
