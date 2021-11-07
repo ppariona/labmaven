@@ -6,7 +6,7 @@ pipeline {
      }
 
     stages {
-        stage('Building') {
+        stage('Checking') {
             when {
                 branch "features/*"
             }
@@ -21,13 +21,12 @@ pipeline {
                     junit(testResults: '**/failsafe-reports/*.xml', allowEmptyResults: true)
                     jacoco runAlways: true
                 }
-                success {
-                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
-                    //archiveArtifacts artifacts: 'target/lab04-0.0.1-SNAPSHOT.jar', fingerprint: true, onlyIfSuccessful: true
-                }
+                //success {
+                //    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
+                //}
             }
         }
-        stage('Stage 2') {
+        stage('OtherStage') {
             when {
                 branch "features/*"
             }
@@ -38,12 +37,25 @@ pipeline {
             }
         }
 
-         stage('Stage 3') {
-                steps {
-                    script {
-                        echo 'Stage 3'
-                    }
-              }
+         stage('Building') {
+            when {
+                branch "master"
+            }
+            steps {
+                script {
+                     sh 'mvn verify'
+                }
+            }
+            post {
+                always {
+                    junit(testResults: '**/surefire-reports/*.xml', allowEmptyResults: true)
+                    junit(testResults: '**/failsafe-reports/*.xml', allowEmptyResults: true)
+                    jacoco runAlways: true
+                }
+                success {
+                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
+                }
+            }
          }
 
          stage('Stage 4') {
